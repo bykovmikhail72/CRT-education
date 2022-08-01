@@ -34,10 +34,8 @@ const person = someFunc();
 person();  // Person name is Viktor, his age is 25
 
 
-const simpleFunc = () => {
-    const name = 'Ivan';
+const simpleFunc = (name, age) => {
     const someAge = () => {
-        const age = '25';
         const result = () => {
             console.log(`His name is ${name} and his age is ${age}`);
         }
@@ -46,7 +44,7 @@ const simpleFunc = () => {
     someAge();
 }
 
-simpleFunc();  // His name is Ivan and his age is 25
+simpleFunc("Ivan", 25);  // His name is Ivan and his age is 25
 
 
 // Примеры использования map, reduce, filter
@@ -90,7 +88,7 @@ const data = [
     },
 ];
 
-const heroes = (data, filter) => {
+const showHeroesInfo = (data, filter) => {
     const modify = modifyHeroes();
     const filtered = filterHeroes(filter);
     const middleAge = showMiddleAge();
@@ -107,24 +105,30 @@ const heroes = (data, filter) => {
         return newArr;
     }
 
-    function showMiddleAge() {
-        const newArr = data.map(item => {
-            const newItem = item.age;
-            return newItem;
-        })
-        const sumAge = newArr.reduce((acc, val) => {
-            return acc + val;
-        })
-        return Math.floor(sumAge/data.length);
+    // function showMiddleAge() {
+    //     const newArr = data.map(item => {
+    //         const newItem = item.age;
+    //         return newItem;
+    //     })
+    //     const sumAge = newArr.reduce((acc, val) => {
+    //         return acc + val;
+    //     })
+    //     return Math.floor(sumAge/data.length);
+    // }
+
+    function showMiddleAge() {  // Увидел ошибку, сделал сразу через дот нотацию
+        const middleAge = data.reduce((acc, val) => {
+            return acc + +val.age;
+        }, 0);
+        return Math.round((middleAge)/data.length);
     }
     
-    // console.log(modify);
     console.log(modify);
     console.log(filtered);  // [ { name: 'Katara', element: 'Water', gender: 'female', age: 14 } ]
     console.log(middleAge);  // 37
 }
 
-heroes(data, 'Water');
+showHeroesInfo(data, 'Water');
 
 
 // Вывести все ключи Объекта в виде массива
@@ -143,6 +147,10 @@ const arrOfKeys = () => {
     }
     console.log(newArr);
 }
+
+const keysOfObj = Object.keys(obj);  // Быстрее и проще) Спасибо
+
+console.log(keysOfObj);
 
 arrOfKeys();
 
