@@ -158,11 +158,11 @@ const Card = () => {
                             <div className="card__price_new">{item.price}</div>
                             <div className="card__price_old">{item.oldPrice}</div>
                         </div>
-                        <div className="card__bonus"><span className="card__bonus_span">{<FontAwesomeIcon icon={faM} />} +{item.bonus}</span> Бонусных рублей</div>
+                        <div className="card__bonus"><span className="card__bonus_span"><FontAwesomeIcon icon={faM} /> +{item.bonus}</span> Бонусных рублей</div>
                         <div className="card__buttons">
-                            <button className="card__buttons_basket">{<FontAwesomeIcon icon={faShoppingCart} />}</button>
-                            <div className="card__buttons_favor">{<FontAwesomeIcon icon={faHeart} />}</div>
-                            <div className="card__buttons_comparison">{<FontAwesomeIcon icon={faSignal} />}</div>
+                            <button className="card__buttons_basket"><FontAwesomeIcon icon={faShoppingCart} /></button>
+                            <div className="card__buttons_favor"><FontAwesomeIcon icon={faHeart} /></div>
+                            <div className="card__buttons_comparison"><FontAwesomeIcon icon={faSignal} /></div>
                         </div>
                     </div>
                 )
