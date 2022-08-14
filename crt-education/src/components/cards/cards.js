@@ -9,7 +9,7 @@ import Spinner from "../spinner/spinner";
 
 import "./cards.sass"
 
-const Card = () => {
+const Card = ({onShowCardInfo}) => {
     const {loading, getCards} = useCardsService();
 
     const [data, setData] = useState([]);
@@ -36,10 +36,10 @@ const Card = () => {
     //eslint-disable-next-line
     useEffect(request, []);
 
+
     const classNames = require('classnames');
 
     
-
     const content = data.map(item => { 
         const btnClass = classNames('card__buttons_favor', {  //Применил библиотеку classNames для реализации активности кнопки
             'card__buttons_favor-active': item.like,
@@ -49,7 +49,8 @@ const Card = () => {
             <div 
                 className="container" 
                 key={item.id}  // Сформированы с помощью uiid в файле cardsService.js
-                id={item.id}>
+                id={item.id}
+                onClick={() => {onShowCardInfo(item.title)}}>
                 <div className="card__head">
                     <div className="card__licvidation">Ликвидация!</div>
                     <button className="card__arrow">{'>'}</button>
@@ -78,7 +79,7 @@ const Card = () => {
 
     return ( // Пример условного рендера, когда карточки товара загружаются с сервера, на их месте показывается спиннер.
         <div className="card">  
-            {loading ? <Spinner/> : content}  
+            {loading ? <Spinner/> : content} 
         </div>
     )
 }
