@@ -48,7 +48,7 @@ const Card = ({onShowCardInfo}) => {
         return (
             <div 
                 className="container" 
-                key={item.id}  // Сформированы с помощью uiid в файле cardsService.js
+                key={item.id}  // Сформированы с помощью uuid в файле cardsService.js
                 id={item.id}
                 onClick={() => {onShowCardInfo(item.title)}}>
                 <div className="card__head">
