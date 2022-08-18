@@ -2,16 +2,16 @@ import { useRef, useState, useEffect } from "react";
 import {useDispatch} from "react-redux";
 import {toggleActive} from "../app/appSlice";
 
+import cn from "classnames";
+
 import useInput from "../../hooks/input.hook";
 
 import './modal.sass'
-///^\d+$/.test(enter_val)
-///^(0|[1-9]\d*)$/.test(e.target.value)
 
 // Тут я создал копию модального окна при нажатии на кнопку "Войти". Попытаюсь реализовать домашнне задание на форме внутри.
 
 const Modal = () => {
-    const [val, setVal] = useState('');
+    const [inputValue, setInputValue] = useState('');
 
     const {validateInput, setInitialInputVal} = useInput();  // Вытаскиваю функции по работе с инпутом из кастомного хука.
 
@@ -22,7 +22,7 @@ const Modal = () => {
     }
 
     const onSendForm = () => {  //При неполностью введенном номере и попытке отправить форму переключаем фокус на инпут.
-        if (val.length === 12) {
+        if (inputValue.length === 12) {
             dispatch(toggleActive());
         }
         ref.current.focus();
@@ -30,10 +30,8 @@ const Modal = () => {
 
     const ref = useRef();  //Инициализируем ref
 
-    const classNames = require('classnames');
-
-    const btnClass = classNames('modal__enter', {  // Применил библиотеку classNames для функционала открытия модального окна.
-        "modal__enter-active": val.length === 12
+    const btnClass = cn('modal__enter', {  // Применил библиотеку classNames для функционала открытия модального окна.
+        "modal__enter-active": inputValue.length === 12
     })
 
     // Реализовал закрытие модального окна по таймеру. При размонтировании модального окна происходит отписка от timeOut.
@@ -65,9 +63,9 @@ const Modal = () => {
                     type="text" 
                     className="modal__input" 
                     placeholder="Телефон"
-                    value={val}
-                    onChange={(e) => validateInput(val, e, setVal)}      // Функция по записи и валидации номера введенного в input. Запись результата в value. // Добавил кастомный хук для валидации введенного значения.
-                    onClick={() => setInitialInputVal(val, setVal)}      // При фокусе на форму создается шаблон. Добавил создание шаблона в инпуте при фокусе, через кастомный хук.
+                    value={inputValue}
+                    onChange={(e) => validateInput(inputValue, e, setInputValue)}      // Функция по записи и валидации номера введенного в input. Запись результата в value. // Добавил кастомный хук для валидации введенного значения.
+                    onClick={() => setInitialInputVal(inputValue, setInputValue)}      // При фокусе на форму создается шаблон. Добавил создание шаблона в инпуте при фокусе, через кастомный хук.
                     ref={el => ref.current = el}
                     onKeyPress={e => {
                             if (e.key === "Enter") {

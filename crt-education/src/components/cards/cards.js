@@ -1,8 +1,10 @@
+import {useState, useEffect} from "react";
+
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faShoppingCart, faM, faSignal} from "@fortawesome/free-solid-svg-icons";
 import {faHeart as voidLike} from "@fortawesome/free-regular-svg-icons";
 
-import {useState, useEffect} from "react";
+import cn from "classnames";
 
 import useCardsService from "../../services/cardsService";
 import Spinner from "../spinner/spinner";
@@ -14,12 +16,12 @@ const Card = ({onShowCardInfo}) => {
 
     const [data, setData] = useState([]);
 
-    function request() {
+    const request = () => {
         getCards()
             .then(createCards)
     };
 
-    function onChangeLiked(e) {
+    const onChangeLiked = (e) => {
         const id = e.target.parentNode.parentNode.parentNode;
         const index = data.findIndex(item => item.id === id.id);
         
@@ -33,15 +35,11 @@ const Card = ({onShowCardInfo}) => {
     const createCards = (cards) => {
         setData(cards);
     };
-    //eslint-disable-next-line
+    // eslint-disable-next-line
     useEffect(request, []);
 
-
-    const classNames = require('classnames');
-
-    
     const content = data.map(item => { 
-        const btnClass = classNames('card__buttons_favor', {  //Применил библиотеку classNames для реализации активности кнопки
+        const btnClass = cn('card__buttons_favor', {  //Применил библиотеку classNames для реализации активности кнопки
             'card__buttons_favor-active': item.like,
         })
 
@@ -50,6 +48,7 @@ const Card = ({onShowCardInfo}) => {
                 className="container" 
                 key={item.id}  // Сформированы с помощью uiid в файле cardsService.js
                 id={item.id}
+                role="button"
                 onClick={() => {onShowCardInfo(item.title)}}>
                 <div className="card__head">
                     <div className="card__licvidation">Ликвидация!</div>

@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import {useCallback, memo} from "react";
 import Card from "../cards/cards";
 
 import './carousel.sass';
@@ -39,7 +39,7 @@ const Carousel = () => {
                 >{">"}</button>
             <h2 className="carousel__title">Хиты продаж</h2>
             <div className="carousel__container">
-                <Card onShowCardInfo={onShowCardInfo}/>
+                <Card onShowCardInfo={memo(onShowCardInfo)}/>
             </div>
         </section>
     )

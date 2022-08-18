@@ -9,7 +9,7 @@ import Modal from "../modal/modal";
 const App = () => {
     const active = useSelector(state => state.app.active);
 
-    const modal = active ? <Modal/> : null
+    const modal = active && <Modal/>
 
     return (
         <>
