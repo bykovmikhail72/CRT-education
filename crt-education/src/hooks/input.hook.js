@@ -1,17 +1,20 @@
+import { useState } from "react";
 
 const useInput = () => {  // Хук по работе с инпутом. Использовал для валидации введенного значения.
-    const validateInput = (val, e, setVal) => {  // Функция по валидации инпута.
-        if (!isNaN(e.target.value) && val.length < 12) {
-            setVal(e.target.value);
+    const [inputValue, setInputValue] = useState('');  // Добавил состояние input в кастомный хук.
+
+    const validateInput = (e) => {  // Функция по валидации инпута.
+        if (!isNaN(e.target.value) && inputValue.length < 12) {
+            setInputValue(e.target.value);
         }
     }
 
-    const setInitialInputVal = (val, setVal) => {  // Функция по созданию шаблона инпута.
-        if (!val) {
-            setVal('+7');
+    const setInitialInputVal = () => {  // Функция по созданию шаблона инпута.
+        if (!inputValue) {
+            setInputValue('+7');
         }
     }
-    return {validateInput, setInitialInputVal};
+    return {validateInput, setInitialInputVal, inputValue};
 }
 
 export default useInput;

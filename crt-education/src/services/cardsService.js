@@ -1,13 +1,15 @@
+import { useCallback } from 'react';
+
 import {useHttp} from '../hooks/http.hook';
 import uuid from 'react-uuid'
 
 const useCardsService = () => {
     const {loading, response} = useHttp();
 
-    const getCards = async () => {
+    const getCards = useCallback(async () => {
         const res = await response("http://localhost:3002/cards");
         return res.map(_transormCard);
-    }
+    }, [response]);
 
     const _transormCard = (card) => {
         return {

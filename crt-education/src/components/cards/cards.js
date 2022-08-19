@@ -16,14 +16,18 @@ const Card = ({onShowCardInfo}) => {
 
     const [data, setData] = useState([]);
 
-    const request = () => {
+    // const request = () => {
+    //     getCards()
+    //         .then(createCards)
+    // };
+
+    useEffect(() => {
         getCards()
             .then(createCards)
-    };
+    }, [getCards])
 
-    const onChangeLiked = (e) => {
-        const id = e.target.parentNode.parentNode.parentNode;
-        const index = data.findIndex(item => item.id === id.id);
+    const onChangeLiked = (id) => {
+        const index = data.findIndex(item => item.id === id);
         
         const newObj = {...data[index], like: !data[index].like};
 
@@ -35,8 +39,6 @@ const Card = ({onShowCardInfo}) => {
     const createCards = (cards) => {
         setData(cards);
     };
-    // eslint-disable-next-line
-    useEffect(request, []);
 
     const content = data.map(item => { 
         const btnClass = cn('card__buttons_favor', {  //Применил библиотеку classNames для реализации активности кнопки
@@ -69,7 +71,7 @@ const Card = ({onShowCardInfo}) => {
                     <button className="card__buttons_basket"><FontAwesomeIcon id={item.id} icon={faShoppingCart} /></button>
                     <div 
                         className={btnClass}
-                        onClick={(e) => {onChangeLiked(e)}}><FontAwesomeIcon id={item.id} icon={voidLike} /></div>
+                        onClick={() => {onChangeLiked(item.id)}}><FontAwesomeIcon id={item.id} icon={voidLike} /></div>
                     <div className="card__buttons_comparison"><FontAwesomeIcon icon={faSignal} /></div>
                 </div>
             </div>

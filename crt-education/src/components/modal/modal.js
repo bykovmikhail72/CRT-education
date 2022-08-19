@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import {useDispatch} from "react-redux";
 import {toggleActive} from "../app/appSlice";
 
@@ -11,9 +11,7 @@ import './modal.sass'
 // Тут я создал копию модального окна при нажатии на кнопку "Войти". Попытаюсь реализовать домашнне задание на форме внутри.
 
 const Modal = () => {
-    const [inputValue, setInputValue] = useState('');
-
-    const {validateInput, setInitialInputVal} = useInput();  // Вытаскиваю функции по работе с инпутом из кастомного хука.
+    const {validateInput, setInitialInputVal, inputValue} = useInput();  // Вытаскиваю функции по работе с инпутом из кастомного хука.
 
     const dispatch = useDispatch();
 
@@ -45,8 +43,7 @@ const Modal = () => {
         return () => {
             clearTimeout(timeOut);
         }
-        //eslint-disable-next-line
-    }, [])
+    }, [dispatch])
 
     return (
         <div className="modal">
@@ -64,8 +61,8 @@ const Modal = () => {
                     className="modal__input" 
                     placeholder="Телефон"
                     value={inputValue}
-                    onChange={(e) => validateInput(inputValue, e, setInputValue)}      // Функция по записи и валидации номера введенного в input. Запись результата в value. // Добавил кастомный хук для валидации введенного значения.
-                    onClick={() => setInitialInputVal(inputValue, setInputValue)}      // При фокусе на форму создается шаблон. Добавил создание шаблона в инпуте при фокусе, через кастомный хук.
+                    onChange={(e) => validateInput(e)}      // Функция по записи и валидации номера введенного в input. Запись результата в value. // Добавил кастомный хук для валидации введенного значения.
+                    onClick={setInitialInputVal}      // При фокусе на форму создается шаблон. Добавил создание шаблона в инпуте при фокусе, через кастомный хук.
                     ref={el => ref.current = el}
                     onKeyPress={e => {
                             if (e.key === "Enter") {
