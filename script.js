@@ -34,17 +34,17 @@ const person = someFunc();
 person();  // Person name is Viktor, his age is 25
 
 
-const simpleFunc = (name, age) => {
-    const someAge = () => {
+const simpleFunc = (name) => {
+    const someAge = (age) => {
         const result = () => {
             console.log(`His name is ${name} and his age is ${age}`);
         }
         result();
     };
-    someAge();
+    someAge(25);
 }
 
-simpleFunc("Ivan", 25);  // His name is Ivan and his age is 25
+simpleFunc("Ivan");  // His name is Ivan and his age is 25
 
 
 // Примеры использования map, reduce, filter

@@ -1,0 +1,43 @@
+.carousel
+    max-width: 1440px
+    padding: 56px 50px
+    overflow: hidden
+    box-sizing: border-box
+    position: relative
+    &__title
+        font-weight: 700
+        font-size: 28px
+        margin: 0 0 24px 0
+    &__left
+        position: absolute
+        top: 50%
+        left: 5%
+        border-radius: 50%
+        width: 40px
+        height: 40px
+        border: none
+        box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .4)
+        background-color: #fff
+        color: rgb(227, 18, 53)
+        font-size: 24px
+        cursor: pointer
+        z-index: 1000
+    &__right
+        position: absolute
+        top: 50%
+        right: 1%
+        border-radius: 50%
+        width: 40px
+        height: 40px
+        border: none
+        box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, .4)
+        background-color: #fff
+        color: rgb(227, 18, 53)
+        font-size: 24px
+        cursor: pointer
+        z-index: 1000
+    &__container
+        transition-duration: .3s
+        max-width: 1440px
+.firstPage
+            transform: translateX(-1420px)
